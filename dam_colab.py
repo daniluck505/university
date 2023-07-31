@@ -42,7 +42,7 @@ class DamApp():
         thickness = int(input('Толщина проницаемого слоя основания: ') or 10)
         self.list_input_data = [height, width, z_top, z_bottom, depth_top, depth_bottom, thickness]
 
-    def make_calc1(self):
+    def make_calc(self):
         self.make_menu()
         self.calc = Calculation(self.list_input_data)
         self.calc.length_filtration()
