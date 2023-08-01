@@ -33,14 +33,14 @@ class DamApp():
         plt.show()
 
     def make_menu(self):
-        height = int(input('Высота плотины: ') or 30) 
-        width = int(input('Ширина гребня плотины: ') or 10)
-        z_top = int(input('Заложение верхового откоса: ') or 3)
-        z_bottom = int(input('Заложение низового откоса: ') or 3)
-        depth_top = int(input('Глубина воды в верхнем бьефе: ') or 20)
-        depth_bottom = int(input('Глубина воды нижнем бьефе: ') or 10)
-        thickness = int(input('Толщина проницаемого слоя основания: ') or 10)
-        self.list_input_data = [height, width, z_top, z_bottom, depth_top, depth_bottom, thickness]
+        height = input('Высота плотины: ')
+        width = input('Ширина гребня плотины: ')
+        z_top = input('Заложение верхового откоса: ')
+        z_bottom = input('Заложение низового откоса: ')
+        depth_top = input('Глубина воды в верхнем бьефе: ')
+        depth_bottom = input('Глубина воды нижнем бьефе: ')
+        thickness = input('Толщина проницаемого слоя основания: ')
+        self.list_input_data = list(map(float, [height, width, z_top, z_bottom, depth_top, depth_bottom, thickness]))
 
     def make_calc(self):
         self.make_menu()
