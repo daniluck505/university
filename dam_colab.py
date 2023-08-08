@@ -55,7 +55,7 @@ class DamApp():
             
             
 
-    def make_calc1(self):
+    def make_calc(self):
         self.make_menu()
         self.calc = Calculation(self.list_input_data)
         self.calc.length_filtration()
