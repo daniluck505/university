@@ -33,16 +33,29 @@ class DamApp():
         plt.show()
 
     def make_menu(self):
-        height = input('Высота плотины: ')
-        width = input('Ширина гребня плотины: ')
-        z_top = input('Заложение верхового откоса: ')
-        z_bottom = input('Заложение низового откоса: ')
-        depth_top = input('Глубина воды в верхнем бьефе: ')
-        depth_bottom = input('Глубина воды нижнем бьефе: ')
-        thickness = input('Толщина проницаемого слоя основания: ')
-        self.list_input_data = list(map(float, [height, width, z_top, z_bottom, depth_top, depth_bottom, thickness]))
+        height = self.check_input(lambda x: True if x > 0 else False, 'Высота плотины: ', 'Только положительное число')
+        width = self.check_input(lambda x: True if x > 0 else False, 'Ширина гребня плотины: ', 'Только положительное число')
+        z_top = self.check_input(lambda x: True if x > 0 else False, 'Заложение верхового откоса: ', 'Только положительное число')
+        z_bottom = self.check_input(lambda x: True if x > 0 else False, 'Заложение низового откоса: ', 'Только положительное число')
+        depth_top = self.check_input(lambda x: True if 0 < x <= height else False, 'Глубина воды в верхнем бьефе: ', 'Не больше высоты плотины')
+        depth_bottom = self.check_input(lambda x: True if 0 < x <= depth_top else False, 'Глубина воды нижнем бьефе: ', 'Не больше отметки верхнего бьефа')
+        thickness = self.check_input(lambda x: True if x >=0 else False, 'Толщина проницаемого слоя основания: ', 'Только положительное число')
+        self.list_input_data = [height, width, z_top, z_bottom, depth_top, depth_bottom, thickness]
+    
+    def check_input(self, check, string, answer=None):
+        try:
+            value = int(input(string))
+        except ValueError:
+            print('Введите число')
+            value = self.check_input(check, string, answer)
+        if not check(value):
+            print(answer)
+            value = self.check_input(check, string, answer)
+        return value
+            
+            
 
-    def make_calc(self):
+    def make_calc1(self):
         self.make_menu()
         self.calc = Calculation(self.list_input_data)
         self.calc.length_filtration()
@@ -157,11 +170,15 @@ class Calculation:
         h1x = [idata[4]+idata[6] if x[i]<0 else hx[i] for i in n_list]
         hx_T = [i - idata[6] for i in hx]
         self.depression_curve = {'hx':hx, 'x':x}
+        print('Координаты кривой депрессии: ')
+        print(f'x: {[round(i, 2) for i in x]}')
+        print(f'hx: {[round(i, 2) for i in hx]}')
 
     def make_idata_list(self, a, b):
         idata = [float(x) for x in self.idata[a:b]]
         return idata
 
 
-# Dam = DamApp()
-# Dam.make_calc1()
+if __name__ == '__main__':
+    Dam = DamApp()
+    Dam.make_calc1()
