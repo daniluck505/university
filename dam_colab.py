@@ -44,7 +44,7 @@ class DamApp():
     
     def check_input(self, check, string, answer=None):
         try:
-            value = int(input(string))
+            value = float(input(string).replace(',', '.'))            
         except ValueError:
             print('Введите число')
             value = self.check_input(check, string, answer)
