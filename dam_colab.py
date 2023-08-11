@@ -52,8 +52,6 @@ class DamApp():
             print(answer)
             value = self.check_input(check, string, answer)
         return value
-            
-            
 
     def make_calc(self):
         self.make_menu()
@@ -126,7 +124,7 @@ class Calculation:
         q2bkf = [x*idata[6]/((0.5+idata[3])*x+idata[3]*idata[5]+0.4*idata[6]) for x in h]
         q2kf = [q2akf[i]+q2bkf[i] for i in l_accuracy]
         self.point_cross = self.find_cross(h, h, q1kf, q2kf)
-
+        print(f'Удельнй расход {round(self.point_cross[1], 3)}')
         # plt.plot(h, q1kf)
         # plt.plot(h, q2kf)
         # plt.xlabel('hв')
@@ -181,4 +179,4 @@ class Calculation:
 
 if __name__ == '__main__':
     Dam = DamApp()
-    Dam.make_calc1()
+    Dam.make_calc()
