@@ -58,6 +58,7 @@ class DamApp():
         self.calc = Calculation(self.list_input_data)
         self.calc.length_filtration()
         self.calc.make_contour_coordinates()
+        self.calc.make_trapezoid_area()
         self.calc.make_height_seepage()
         self.calc.make_depression_curve()
         self.make_plan()
@@ -87,6 +88,11 @@ class Calculation:
     def __init__(self, input_data):
         self.idata = input_data
         self.data = []
+        
+    def make_trapezoid_area(self):
+        width = self.idata[0] * (self.idata[2] + self.idata[3])
+        S = (2 * self.idata[1] + width) * self.idata[0] / 2
+        print(f'V = {S} м3')
 
     def length_filtration(self):
         idata = self.make_idata_list(0, 7)
@@ -124,7 +130,7 @@ class Calculation:
         q2bkf = [x*idata[6]/((0.5+idata[3])*x+idata[3]*idata[5]+0.4*idata[6]) for x in h]
         q2kf = [q2akf[i]+q2bkf[i] for i in l_accuracy]
         self.point_cross = self.find_cross(h, h, q1kf, q2kf)
-        print(f'Удельнй расход {round(self.point_cross[1], 3)}')
+        print(f'Удельный расход {round(self.point_cross[1], 3)}')
         # plt.plot(h, q1kf)
         # plt.plot(h, q2kf)
         # plt.xlabel('hв')
