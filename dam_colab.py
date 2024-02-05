@@ -178,7 +178,7 @@ class Calculation:
         hx = [np.sqrt(2*qkf*(Lv-i)+h2**2) for i in x1]
         h1x = [idata[4]+idata[6] if x[i]<0 else hx[i] for i in n_list]
         hx_T = [i - idata[6] for i in hx]
-        print(f'Высота высачивания = {round(hx[-1] - idata[6] - idata[5], 2)}')
+        print(f'Высота высачивания {round(hx[-1] - idata[6] - idata[5], 2)}')
         self.depression_curve = {'hx':hx, 'x':x}
         # self.depression_curve = {'hx':h1x, 'x':x}
         print('Координаты кривой депрессии: ')
