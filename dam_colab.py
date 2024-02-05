@@ -138,6 +138,10 @@ class Calculation:
         # plt.show()
 
     def find_cross(self, x1, x2, y1, y2):
+        idata = self.make_idata_list(0, 7)
+        if idata[4] == idata[5]:
+            return 0, 0
+
         answer = []
         x_begin = max(x1[0], x2[0])
         x_end = min(x1[-1], x2[-1])
@@ -156,6 +160,7 @@ class Calculation:
                 if len(tmp_idx) != 0:
                     answer.append((x3[tmp_idx[0]], y2_new[tmp_idx[0]]))
             idx += 1
+        print(answer[0])
         return answer[0]
 
     def make_depression_curve(self):
@@ -173,7 +178,7 @@ class Calculation:
         hx = [np.sqrt(2*qkf*(Lv-i)+h2**2) for i in x1]
         h1x = [idata[4]+idata[6] if x[i]<0 else hx[i] for i in n_list]
         hx_T = [i - idata[6] for i in hx]
-        print(f'отм. выс - отм. дна = {round(hx[-1] - idata[6], 2)}')
+        print(f'Высота высачивания = {round(hx[-1] - idata[6] - idata[5], 2)}')
         self.depression_curve = {'hx':hx, 'x':x}
         # self.depression_curve = {'hx':h1x, 'x':x}
         print('Координаты кривой депрессии: ')
