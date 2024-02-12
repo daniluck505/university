@@ -160,7 +160,6 @@ class Calculation:
                 if len(tmp_idx) != 0:
                     answer.append((x3[tmp_idx[0]], y2_new[tmp_idx[0]]))
             idx += 1
-        print(answer[0])
         return answer[0]
 
     def make_depression_curve(self):
